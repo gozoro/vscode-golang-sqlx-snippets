@@ -1,0 +1,165 @@
+{
+	"SELECT to variable using *sqlx.DB.QueryRowx()": {
+		"prefix": "sqlx: SELECT.one",
+		"description": [
+			"Retrieves one row from a table or view into a variable using the *sql.DB.QueryRowx() method."
+		],
+		"body": [
+			"var name string",
+			"",
+			"query := fmt.Sprintf(`SELECT name FROM items WHERE id = %d`, id)",
+			"",
+			"// DB is *sqlx.DB",
+			"err := DB.QueryRowx(query).Scan(&name)",
+			"if err != nil && err != sql.ErrNoRows {",
+			"    log.Println(err)",
+			"}"
+        ]
+	},
+
+
+	"SELECT to slice of structures using *sqlx.DB.SelectContext()": {
+		"prefix": "sqlx: SELECT.all",
+		"description": [
+			"Retrieves all rows from a table or view into a slice of structures."
+		],
+		"body": [
+			"query := fmt.Sprintf(`SELECT id, name FROM items WHERE id = %d`, id )",
+			"",
+			"var rows []struct {",
+			"ID int64",
+			"Name string",
+			"}",
+			"",
+			"// DB is *sqlx.DB",
+			"if err := DB.SelectContext(context.Background(), &rows, query); err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+	},
+
+
+	"INSERT using *sqlx.DB.Exec()": {
+		"prefix": "sqlx: INSERT",
+		"description": [
+			"Creates new rows in a table."
+		],
+		"body": [
+			"query = fmt.Sprintf(`INSERT INTO items  (name, time) VAUES ('%s', %d)`, name, time)",
+			"",
+			"// DB is *sqlx.DB",
+			"res, err := DB.Exec(query)",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}",
+			"",
+			"insertedId, err := res.LastInsertId()",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+	},
+
+
+	"DELETE using *sqlx.DB.Exec()": {
+		"prefix": "sqlx: DELETE",
+		"description": [
+			"Deletes rows of a table."
+		],
+		"body": [
+			"query = fmt.Sprintf(`DELETE FROM items WHERE id = %d`, id)",
+			"",
+			"// DB is *sqlx.DB",
+			"res, err := DB.Exec(query)",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}",
+			"",
+			"deletedCount, err := res.RowsAffected()",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+	},
+
+
+	"UPDATE using *sqlx.DB.Exec()": {
+		"prefix": "sqlx: UPDATE",
+		"description": [
+			"Updates rows of a table."
+		],
+		"body": [
+			"query = fmt.Sprintf(`UPDATE items SET name='%s' WHERE id = %d`, name, id)",
+			"",
+			"// DB is *sqlx.DB",
+			"res, err := DB.Exec(query)",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}",
+			"",
+			"updatedCount, err := res.RowsAffected()",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+	},
+
+
+
+
+
+
+
+    "SELECT MAX(...) using *sqlx.DB.QueryRowx()": {
+        "prefix": "sqlx: SELECT.MAX",
+        "description": [
+			"The function MAX() is aggregate function. Returns the maximum value of the expression in the grouped rows.",
+			"An aggregate function generates summary results, simultaneously operating on several database rows.",
+			"The output is generated based on the group of rows. ",
+
+			"A code snippet for getting the result of an aggregate function MAX(). The result of the function can be NULL."
+		],
+		"body": [
+			"var maxId *int64 // a pointer is used here because the result of the function can be NULL ",
+			"query := fmt.Sprintf(`SELECT MAX(id) FROM items WHERE id >= %d`, 0)",
+			"",
+			"// DB is *sqlx.DB",
+			"err := DB.QueryRowx(query).Scan(&maxId)",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+    },
+
+
+    "SELECT MIN(...) using *sqlx.DB.QueryRowx()": {
+        "prefix": "sqlx: SELECT.MIN",
+        "description": [
+			"The function MIN() is aggregate function. Returns the minimum value of the expression in the grouped rows.",
+			"An aggregate function generates summary results, simultaneously operating on several database rows.",
+			"The output is generated based on the group of rows. ",
+
+			"A code snippet for getting the result of an aggregate function MIN(). The result of the function can be NULL."
+		],
+		"body": [
+			"var maxId *int64 // a pointer is used here because the result of the function can be NULL ",
+			"query := fmt.Sprintf(`SELECT MIN(id) FROM items WHERE id >= %d`, 0)",
+			"",
+			"// DB is *sqlx.DB",
+			"err := DB.QueryRowx(query).Scan(&maxId)",
+			"",
+			"if err != nil {",
+			"    log.Println(err)",
+			"}"
+        ]
+    }
+
+
+}

@@ -1,0 +1,40 @@
+{
+	"name": "go-sqlx-snippets",
+	"displayName": "Golang sqlx Snippets",
+	"description": "Golang sqlx snippets for vscode",
+	"version": "1.0.0",
+	"publisher": "RomanBolovintsev",
+	"repository": "https://github.com/gozoro/vscode-golang-sqlx-snippets",
+	"engines": {
+		"vscode": ">=1.40.0"
+	},
+	"license": "MIT",
+	"icon": "icon.png",
+	"keywords": [
+        "golang",
+		"go",
+        "sqlx",
+		"sql",
+        "snippets",
+		"snippet"
+    ],
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "go",
+				"extensions": [
+					".go"
+				]
+			}
+		],
+		"snippets": [
+			{
+				"language": "go",
+				"path": "go-sqlx.json"
+			}
+		]
+	}
+}
